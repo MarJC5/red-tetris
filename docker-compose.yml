@@ -18,7 +18,6 @@ services:
       - '3000:3000'
     volumes:
       # mount your Node.js project
-      - ~/.nuxtrc:/.nuxtrc
       - ./client:/home/dev/apps/client
       - ./server:/home/dev/apps/server
       - /etc/localtime:/etc/localtime:ro
