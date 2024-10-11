@@ -1,0 +1,23 @@
+networks:
+  default:
+    name: redtetris
+
+services:
+
+  node:
+    image: node:lts
+    container_name: node_redtetris
+    tty: true
+    restart: unless-stopped
+    working_dir: /home/dev/apps/game
+    environment:
+      TZ: "Europe/Zurich"
+    ports:
+      # For local development outside of the container
+      - '5173:5173'
+      - '3000:3000'
+    volumes:
+      # mount your Node.js project
+      - ~/.nuxtrc:/.nuxtrc
+      - ./game:/home/dev/apps/game
+      - /etc/localtime:/etc/localtime:ro
