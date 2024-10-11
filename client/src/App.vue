@@ -5,8 +5,6 @@ import { io, Socket } from 'socket.io-client'
 
 const socket = ref<Socket | null>(null)
 const connected = ref(false)
-const message = ref('')
-const serverMessage = ref('')
 
 onMounted(() => {
   // Initialize socket connection
