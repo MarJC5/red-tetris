@@ -32,21 +32,26 @@ const props = withDefaults(defineProps<Props>(), {
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 
-    inset -1px -1px 2px var(--gameboy-button-shadow),
-    inset 1px 1px 2px var(--gameboy-body-highlight);
+    inset -1px -1px 2px rgba(0, 0, 0, 0.3),    // Inner shadow for depth
+    inset 1px 1px 2px rgba(255, 255, 255, 0.1), // Subtle highlight
+    0 1px 2px rgba(0, 0, 0, 0.2);              // Outer shadow for lift
 
   &:active {
     background-color: var(--gameboy-button-shadow);
     transform: scale(0.95);
-    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+      inset 1px 1px 3px rgba(0, 0, 0, 0.4),     // Deeper inner shadow when pressed
+      inset -1px -1px 2px rgba(0, 0, 0, 0.2);   // Slight outer shadow when pressed
   }
 }
 
 .menu-label {
   font-size: 10px;
   font-weight: bold;
-  color: var(--gameboy-text);
-  text-shadow: 1px 1px 1px var(--gameboy-text-shadow);
+  color: var(--gameboy-button-shadow);
+  line-height: 1;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
+  user-select: none;
 }
 </style>

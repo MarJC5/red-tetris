@@ -48,24 +48,48 @@ onUnmounted(() => {
       <div class="gameboy__controls-top">
         <!-- D-pad section -->
         <div class="gameboy__dpad">
-          <DirectionButton class="gameboy__dpad-button gameboy__dpad-button--up"/>
-          <DirectionButton class="gameboy__dpad-button gameboy__dpad-button--left"/>
-          <DirectionButton class="gameboy__dpad-button gameboy__dpad-button--right"/>
-          <DirectionButton class="gameboy__dpad-button gameboy__dpad-button--down"/>
+          <DirectionButton
+            direction="up"
+            class="gameboy__dpad-button gameboy__dpad-button--up"
+          />
+          <DirectionButton
+            direction="left"
+            class="gameboy__dpad-button gameboy__dpad-button--left"
+          />
+          <DirectionButton
+            direction="right"
+            class="gameboy__dpad-button gameboy__dpad-button--right"
+          />
+          <DirectionButton
+            direction="down"
+            class="gameboy__dpad-button gameboy__dpad-button--down"
+          />
           <div class="gameboy__dpad-center"></div>
         </div>
 
         <!-- Action buttons section -->
         <div class="gameboy__action-buttons">
-          <ActionButton text="A" class="gameboy__action-button gameboy__action-button--a"/>
-          <ActionButton text="B" class="gameboy__action-button gameboy__action-button--b"/>
+          <ActionButton
+            text="A"
+            class="gameboy__action-button gameboy__action-button--a"
+          />
+          <ActionButton
+            text="B"
+            class="gameboy__action-button gameboy__action-button--b"
+          />
         </div>
       </div>
 
       <!-- Menu buttons -->
       <div class="gameboy__menu">
-        <MenuButton class="gameboy__menu-button gameboy__menu-button--select" text="SELECT"/>
-        <MenuButton class="gameboy__menu-button gameboy__menu-button--start" text="START"/>
+        <MenuButton
+          class="gameboy__menu-button gameboy__menu-button--select"
+          text="SELECT"
+        />
+        <MenuButton
+          class="gameboy__menu-button gameboy__menu-button--start"
+          text="START"
+        />
       </div>
     </div>
 
@@ -94,18 +118,18 @@ onUnmounted(() => {
   }
 
   &__controls {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 15px;
-  position: relative;
-}
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+    position: relative;
+  }
 
-&__controls-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+  &__controls-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 
   &__dpad {
     position: relative;
@@ -121,7 +145,7 @@ onUnmounted(() => {
 
       &:active {
         background-color: var(--gameboy-button-shadow);
-        transform: scale(0.95);
+        //transform: scale(0.95);
       }
 
       &--up,
@@ -167,35 +191,29 @@ onUnmounted(() => {
   }
 
   &__action-buttons {
-  display: flex;
-  flex-direction: column;  // Keep vertical layout
-  gap: 15px;              // Space between buttons
-  width: 80px;           // Set width to 100px
-}
-
-&__action-button {
-  &--a {
     display: flex;
-    justify-content: flex-end;    // Push A button to the right
+    flex-direction: column;
+    gap: 15px;
+    width: 80px;
   }
 
-  &--b {
-    display: flex;
-    justify-content: flex-start;  // Keep B button to the left
+  &__action-button {
+    &--a {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &--b {
+      display: flex;
+      justify-content: flex-start;
+    }
   }
-}
 
   &__menu {
     display: flex;
     justify-content: center;
     gap: 20px;
     padding: 20px;
-
-    // If you need to position it absolutely
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
 </style>

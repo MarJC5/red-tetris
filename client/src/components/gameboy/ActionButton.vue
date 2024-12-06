@@ -1,18 +1,16 @@
 <script setup lang="ts">
 interface Props {
-  text?: string;         // For A or B label
-  rotate?: number;       // For button rotation if needed
-  onClick?: () => void;  // For click handler
+  text?: string;
+  rotate?: number;
+  onClick?: () => void;
 }
 
-// Define props with defaults
 const props = withDefaults(defineProps<Props>(), {
   text: 'A',
   rotate: 0,
   onClick: () => {}
 });
 
-// Emit events
 const emit = defineEmits(['click']);
 
 const handleClick = () => {
@@ -31,38 +29,45 @@ const handleClick = () => {
       @click="handleClick"
       :aria-label="`${text} button`"
     >
-
-    <span class="btn-label">{{ text }}</span>
-  </button>
+      <span class="btn-label">{{ text }}</span>
+    </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
 .action-btn {
   width: 40px;
   height: 40px;
-  background-color: var(--gameboy-button-primary);
+  background-color: var(--gameboy-dpad);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 
-    inset -2px -2px 4px var(--gameboy-button-shadow),
-    inset 2px 2px 4px var(--gameboy-body-highlight);
+    inset -1px -1px 2px rgba(0, 0, 0, 0.3),    // Inner shadow for depth
+    inset 1px 1px 2px rgba(255, 255, 255, 0.1), // Subtle highlight
+    0 1px 2px rgba(0, 0, 0, 0.2);              // Outer shadow for lift
 
   &:active {
     background-color: var(--gameboy-button-shadow);
     transform: scale(0.95);
     box-shadow: 
-      inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+      inset 1px 1px 3px rgba(0, 0, 0, 0.4),     // Deeper inner shadow when pressed
+      inset -1px -1px 2px rgba(0, 0, 0, 0.2);   // Slight outer shadow when pressed
+
+    .btn-label {
+      color: var(--gameboy-dpad);
+    }
   }
 }
 
 .btn-label {
-  font-size: 12px;
-  font-weight: bold;
-  color: var(--gameboy-text);
-  text-shadow: 1px 1px 1px var(--gameboy-text-shadow);
+  font-size: 20px;
+  color: var(--gameboy-button-shadow);
+  line-height: 1;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 </style>
