@@ -129,11 +129,6 @@ onMounted(() => {
   appearance: none;
   width: 100%;
   height: 8px; /* Track height */
-  background: linear-gradient(
-    to right,
-    var(--gameboy-button-primary) calc(var(--slider-value, 50%)),
-    var(--gameboy-body-shadow) 0
-  ); /* Active and inactive track colors */
   border-radius: 5px; /* Rounded track */
   outline: none;
   cursor: pointer;
@@ -148,7 +143,7 @@ onMounted(() => {
     appearance: none;
     width: 20px; /* Thumb size */
     height: 20px;
-    background: var(--gameboy-body-primary);
+    background: var(--gameboy-text); /* Thumb color */
     border: 2px solid var(--gameboy-button-shadow);
     border-radius: 50%;
     cursor: pointer;
