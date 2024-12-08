@@ -4,11 +4,13 @@
   "description": "Multiplayer Tetris game",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "dev": "nodemon main.js"
+    "start": "nodemon main.js",
+    "build": "cd ../client && yarn build",
+    "install-all": "cd .. && yarn install && cd client && yarn install",
+    "deploy": "yarn build && yarn start"
   },
   "dependencies": {
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "socket.io": "^4.8.0"
   },
   "devDependencies": {

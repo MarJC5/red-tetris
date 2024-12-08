@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: process.env.NODE_ENV === 'production' ? false : "http://localhost:5173",
     methods: ["GET", "POST"]
   }
 });
@@ -47,10 +47,12 @@ const logger = {
   }
 };
 
+// Serve static files from Vue build
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+// Handle SPA routing - always return index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 const getIpAddress = (socket) => {
