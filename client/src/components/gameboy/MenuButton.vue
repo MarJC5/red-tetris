@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useSettingsStore } from '@/stores/settings';
+import { defineProps, defineEmits, withDefaults } from 'vue';
+import { useRouter } from 'vue-router'
 
 interface Props {
   text?: string;  // For SELECT or START text
@@ -13,6 +16,12 @@ const emit = defineEmits(['buttonDown', 'buttonUp']);
 
 const isActive = ref(false);
 
+// Use the router
+const router = useRouter();
+
+// Use the settings store
+const settingsStore = useSettingsStore();
+
 // Key mapping for menu buttons
 const keyMap: { [key: string]: string } = {
   s: 'START',    // Enter key for Start
@@ -24,6 +33,18 @@ const keyMap: { [key: string]: string } = {
 const handleButtonDown = () => {
   isActive.value = true;
   emit('buttonDown', props.text);
+  // Play sound on button down
+  settingsStore.playSound('click');
+
+  // SELECT navigate to home
+  if (props.text === 'SELECT') {
+    router.push('/');
+  }
+
+  // START navigate to tetris
+  if (props.text === 'START') {
+      router.push('/tetris');
+    }
 };
 
 const handleButtonUp = () => {
@@ -36,6 +57,18 @@ const handleKeydown = (event: KeyboardEvent) => {
   if (pressedButton === props.text && !event.repeat) {
     isActive.value = true;
     emit('buttonDown', props.text);
+    // Play sound on button down
+    settingsStore.playSound('click');
+
+    // SELECT navigate to home
+    if (props.text === 'SELECT') {
+      router.push('/');
+    }
+
+    // START navigate to tetris
+    if (props.text === 'START') {
+      router.push('/tetris');
+    }
   }
 };
 

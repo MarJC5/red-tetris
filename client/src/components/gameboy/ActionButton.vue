@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useSettingsStore } from '@/stores/settings'; 
 
 interface Props {
   text?: string;
@@ -17,6 +18,9 @@ const emit = defineEmits(['buttonDown', 'buttonUp', 'click']);
 
 const isActive = ref(false);
 
+// Use the settings store
+const settingsStore = useSettingsStore();
+
 // Updated key mapping to use actual A and B keys
 const keyMap: { [key: string]: string } = {
   a: 'A',
@@ -28,6 +32,18 @@ const keyMap: { [key: string]: string } = {
 const handleButtonDown = () => {
   isActive.value = true;
   emit('buttonDown', props.text);
+  // Play sound on button down
+  settingsStore.playSound('click');
+
+  // B button to go back
+  if (props.text === 'B') {
+    window.history.back();
+  }
+
+  // A button to go forward
+  if (props.text === 'A') {
+    window.history.forward();
+  }
 };
 
 const handleButtonUp = () => {
@@ -42,6 +58,18 @@ const handleKeydown = (event: KeyboardEvent) => {
   if (pressedButton === props.text && !event.repeat) {
     isActive.value = true;
     emit('buttonDown', props.text);
+    // Play sound on button down
+    settingsStore.playSound('click');
+
+    // B button to go back
+    if (props.text === 'B') {
+      window.history.back();
+    }
+
+    // A button to go forward
+    if (props.text === 'A') {
+      window.history.forward();
+    }
   }
 };
 

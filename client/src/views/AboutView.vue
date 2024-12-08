@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import HouseIcon from '@/components/icons/HouseIcon.vue';
 </script>
 
 <template>

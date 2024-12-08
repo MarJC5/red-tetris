@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import HouseIcon from '@/components/icons/HouseIcon.vue';
-import ThemeSelector from '@/components/ThemeSelector.vue';
+import SoundEffects from '@/components/Settings/SoundEffects.vue'
+import ThemeSelector from '@/components/Settings/ThemeSelector.vue'
 </script>
 
 <template>
@@ -8,13 +8,15 @@ import ThemeSelector from '@/components/ThemeSelector.vue';
     <h1>Settings</h1>
 
     <ThemeSelector />
-   
-    <router-link to="/" class="link link--icon">
-      Back to Home
-    </router-link>
+
+    <SoundEffects />
+
+    <router-link to="/" class="link link--icon"> Back to Home </router-link>
   </div>
 </template>
 
 <style scoped lang="scss">
-
+.link {
+  margin-top: 20px;
+}
 </style>

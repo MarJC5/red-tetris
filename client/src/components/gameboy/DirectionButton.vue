@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, defineProps, withDefaults, defineEmits, onMounted, onUnmounted } from 'vue';
+import { useSettingsStore } from '@/stores/settings'; 
 
 interface Props {
   direction?: 'up' | 'down' | 'left' | 'right';
@@ -7,6 +8,9 @@ interface Props {
 }
 
 const isActive = ref(false);
+
+// Use the settings store
+const settingsStore = useSettingsStore();
 
 const props = withDefaults(defineProps<Props>(), {
   direction: 'up'
@@ -25,6 +29,8 @@ const emit = defineEmits(['buttonDown', 'buttonUp', 'click']);
 const handleButtonDown = () => {
   isActive.value = true;
   emit('buttonDown', props.direction);
+  // Play sound on button down
+  settingsStore.playSound('click');
 };
 
 const handleButtonUp = () => {
@@ -46,6 +52,8 @@ const handleKeydown = (event: KeyboardEvent) => {
   if (pressedDirection === props.direction && !event.repeat) {
     isActive.value = true;
     emit('buttonDown', props.direction);
+    // Play sound on button down
+    settingsStore.playSound('click');
   }
 };
 
