@@ -13,7 +13,8 @@ export const useSettingsStore = defineStore('settings', () => {
   const volume = ref(1); // Volume (0.0 to 1.0)
   const soundEffects = {
     click: new Audio('/sounds/click.wav'),
-    error: new Audio('/sounds/cancel.wav'),
+    cancel: new Audio('/sounds/cancel.wav'),
+    confirm: new Audio('/sounds/confirm.wav'),
   };
 
   // Load preferences from localStorage

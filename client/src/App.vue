@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { onMounted, onUnmounted } from 'vue'
+import { useSettingsStore } from '@/stores/settings'
 import Screen from '@/components/gameboy/Screen.vue'
 import DirectionButton from '@/components/gameboy/DirectionButton.vue'
 import ActionButton from '@/components/gameboy/ActionButton.vue'
 import Speakers from '@/components/gameboy/Speakers.vue'
 import MenuButton from '@/components/gameboy/MenuButton.vue'
+
+const settingsStore = useSettingsStore()
 
 // Create a function to handle resize
 const updateGameboySize = () => {
@@ -29,12 +32,21 @@ const updateGameboySize = () => {
   )
 }
 
+const handleLinkClick = (event: Event) => {
+  const target = event.target as HTMLElement
+  if (target.tagName === 'A') {
+    settingsStore.playSound('confirm')
+  }
+}
+
 onMounted(() => {
   updateGameboySize()
+  document.addEventListener('click', handleLinkClick)
   window.addEventListener('resize', updateGameboySize)
 })
 
 onUnmounted(() => {
+  document.removeEventListener('click', handleLinkClick)
   window.removeEventListener('resize', updateGameboySize)
 })
 </script>
@@ -68,9 +80,7 @@ onUnmounted(() => {
             class="gameboy__dpad-button gameboy__dpad-button--down"
           />
           <div class="gameboy__dpad-center">
-            <span>
-              &#9679;
-            </span>
+            <span> &#9679; </span>
           </div>
         </div>
 
@@ -101,8 +111,6 @@ onUnmounted(() => {
         <Speakers />
       </div>
     </div>
-
-    
   </div>
 </template>
 
@@ -120,7 +128,7 @@ onUnmounted(() => {
 
   // Grainy overlay
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -141,7 +149,7 @@ onUnmounted(() => {
       inset 0 2px 2px var(--gameboy-body-highlight);
 
     // Grainy overlay
-    &::before { 
+    &::before {
       border-radius: 8px 8px 40px 8px;
     }
   }
@@ -167,20 +175,22 @@ onUnmounted(() => {
     height: 100px;
 
     &-center {
-      box-shadow: 
-    inset -1px -1px 2px rgba(0, 0, 0, 0.3),    // Inner shadow for depth
-    inset 1px 1px 2px rgba(255, 255, 255, 0.1), // Subtle highlight
-    0 1px 2px rgba(0, 0, 0, 0.2);              // Outer shadow for lift
-        span {
-          color: var(--gameboy-button-shadow);
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 20px;
-          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-        }
+      box-shadow:
+        inset -1px -1px 2px rgba(0, 0, 0, 0.3),
+        // Inner shadow for depth
+        inset 1px 1px 2px rgba(255, 255, 255, 0.1),
+        // Subtle highlight
+        0 1px 2px rgba(0, 0, 0, 0.2); // Outer shadow for lift
+      span {
+        color: var(--gameboy-button-shadow);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
       }
+    }
 
     &-button {
       position: absolute;
