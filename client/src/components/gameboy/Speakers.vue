@@ -10,15 +10,15 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const generateSpeakerPattern = () => {
-  const rowPatterns = {
+  const rowPatterns: Record<string, Array<'placeholder' | 'open' | 'closed'>> = {
     edge: ['placeholder', 'open', 'closed', 'open', 'closed', 'open', 'closed', 'placeholder'],
     full: ['open', 'closed', 'open', 'closed', 'open', 'closed', 'open', 'closed'],
     fullAlt: ['closed', 'open', 'closed', 'open', 'closed', 'open', 'closed', 'open']
   };
 
-  const rowSequence = [
+  const rowSequence: Array<keyof typeof rowPatterns> = [
     'edge',
     'full',
     'fullAlt',

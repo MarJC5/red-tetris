@@ -18,6 +18,13 @@ export default defineConfig({
       '@scss': fileURLToPath(new URL('./src/assets/scss', import.meta.url))
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler' // or "modern"
+      }
+    }
+  },
   server: {
     host: '0.0.0.0'
   }
