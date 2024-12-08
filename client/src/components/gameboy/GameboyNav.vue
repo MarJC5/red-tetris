@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import GameIcon from '@/components/icons/GameIcon.vue';
 import AboutIcon from '@/components/icons/AboutIcon.vue';
+import LeaderBoardIcon from '@/components/icons/LeaderBoardIcon.vue';
 </script>
 
 <template>
@@ -18,6 +19,13 @@ import AboutIcon from '@/components/icons/AboutIcon.vue';
           About
         </router-link>
       </li>
+
+      <li>
+        <router-link to="/leaderboard" class="link link--icon">
+          <LeaderBoardIcon />
+          Leaderboard
+        </router-link>
+      </li>
     </ul>
   </nav>
 </template>
@@ -29,9 +37,10 @@ import AboutIcon from '@/components/icons/AboutIcon.vue';
   ul {
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
 
   li {
