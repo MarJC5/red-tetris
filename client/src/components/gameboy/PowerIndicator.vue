@@ -32,8 +32,7 @@ onMounted(() => {
 
 <template>
     <div class="power-indictator">
-      <span :class="{ 'color-green': connected, 'color-red': !connected }"></span>
-      <p>power</p>
+      <span :class="{ 'online': connected, 'offline': !connected }"></span>
     </div>
   </template>
   
@@ -44,6 +43,21 @@ onMounted(() => {
     gap: 0.5rem;
     font-size: 1.5rem;
     color: var(--color-text);
+    
+    span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .online {
+      background-color: var(--gameboy-power-led);
+    }
+
+    .offline {
+      background-color: var(--gameboy-power-led);
+      opacity: 0.5;
+    }
   }
   </style>
   

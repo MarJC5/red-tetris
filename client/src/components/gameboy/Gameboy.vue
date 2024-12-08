@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import Screen from '@/components/gameboy/Screen.vue'
 import DirectionButton from '@/components/gameboy/DirectionButton.vue'
 import ActionButton from '@/components/gameboy/ActionButton.vue'
@@ -90,12 +90,12 @@ onUnmounted(() => {
           class="gameboy__menu-button gameboy__menu-button--start"
           text="START"
         />
+
+        <Speakers />
       </div>
     </div>
 
-    <div class="gameboy__speakers">
-      <Speakers />
-    </div>
+    
   </div>
 </template>
 
@@ -114,13 +114,18 @@ onUnmounted(() => {
     height: var(--gameboy-height);
     margin: 15vh auto;
     border-radius: 8px 8px 40px 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 
+      // Subtle outer shadow
+      0 8px 24px rgba(0, 0, 0, 0.2),
+      // Very subtle inner shadow at the top
+      inset 0 2px 2px var(--gameboy-body-highlight);
   }
 
   &__controls {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 50px;
     padding: 15px;
     position: relative;
   }
@@ -210,6 +215,7 @@ onUnmounted(() => {
   }
 
   &__menu {
+    position: relative;
     display: flex;
     justify-content: center;
     gap: 20px;

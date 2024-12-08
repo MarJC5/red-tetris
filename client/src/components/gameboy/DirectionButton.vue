@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { ref, defineProps, withDefaults, defineEmits, onMounted, onUnmounted } from 'vue';
+
 interface Props {
   direction?: 'up' | 'down' | 'left' | 'right';
+  onClick?: (direction: string) => void;
 }
+
+const isActive = ref(false);
 
 const props = withDefaults(defineProps<Props>(), {
   direction: 'up'
@@ -13,11 +18,67 @@ const directionIndicator = {
   left: '◄',
   right: '►'
 };
+
+const emit = defineEmits(['buttonDown', 'buttonUp', 'click']);
+
+// Handle mouse/touch events
+const handleButtonDown = () => {
+  isActive.value = true;
+  emit('buttonDown', props.direction);
+};
+
+const handleButtonUp = () => {
+  isActive.value = false;
+  emit('buttonUp', props.direction);
+};
+
+// Key mapping for direction buttons (arrow keys)
+const keyMap: { [key: string]: 'up' | 'down' | 'left' | 'right' } = {
+  arrowup: 'up',
+  arrowdown: 'down',
+  arrowleft: 'left',
+  arrowright: 'right'
+};
+
+// Handle keyboard events
+const handleKeydown = (event: KeyboardEvent) => {
+  const pressedDirection = keyMap[event.key.toLowerCase()];
+  if (pressedDirection === props.direction && !event.repeat) {
+    isActive.value = true;
+    emit('buttonDown', props.direction);
+  }
+};
+
+const handleKeyup = (event: KeyboardEvent) => {
+  const pressedDirection = keyMap[event.key.toLowerCase()];
+  if (pressedDirection === props.direction) {
+    isActive.value = false;
+    emit('buttonUp', props.direction);
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('keyup', handleKeyup);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('keyup', handleKeyup);
+});
 </script>
 
 <template>
   <div :class="['btn-action', `btn-action--${direction}`]">
-    <button :class="['direction-btn', `btn-action--${direction}`]">
+    <button 
+      :class="['direction-btn', `btn-action--${direction}`, { 'active': isActive }]"
+      :aria-label="`Direction button ${direction}`"
+      @mousedown="handleButtonDown"
+      @mouseup="handleButtonUp"
+      @mouseleave="handleButtonUp"
+      @touchstart.prevent="handleButtonDown"
+      @touchend.prevent="handleButtonUp"
+    >
       <span class="direction-indicator">{{ directionIndicator[direction] }}</span>
     </button>
   </div>
@@ -62,6 +123,7 @@ const directionIndicator = {
     inset 1px 1px 2px rgba(255, 255, 255, 0.1), // Subtle highlight
     0 1px 2px rgba(0, 0, 0, 0.2);              // Outer shadow for lift
 
+  &.active,
   &:active {
     background-color: var(--gameboy-button-shadow);
     transform: scale(0.95);

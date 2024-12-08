@@ -23,7 +23,7 @@
     --gameboy-text-shadow: rgba(0, 0, 0, 0.3);
     --gameboy-speaker: #4A0072;
     --gameboy-screen-bg: #9BA37E;
-    --gameboy-screen-pixels: #0F380F;
+    --gameboy-screen-pixels: #BFBFBF;
     
     // Screen Dimensions
     --gameboy-width: 375px;
@@ -42,6 +42,8 @@
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-circle: 50%;
     
     // Transitions
     --transition-speed: 0.3s;
@@ -66,7 +68,7 @@
       --gameboy-text-shadow: rgba(0, 0, 0, 0.2);
       --gameboy-speaker: #2C2C2C;
       --gameboy-screen-bg: #7E8416;
-      --gameboy-screen-pixels: #0F380F;
+      --gameboy-screen-pixels: #BFBFBF;
       
       // Power Indicator
       --gameboy-power-led: #CE0000;

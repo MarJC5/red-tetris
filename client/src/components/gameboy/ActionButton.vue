@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+
 interface Props {
   text?: string;
   rotate?: number;
@@ -11,12 +13,57 @@ const props = withDefaults(defineProps<Props>(), {
   onClick: () => {}
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(['buttonDown', 'buttonUp', 'click']);
 
-const handleClick = () => {
-  emit('click');
-  props.onClick();
+const isActive = ref(false);
+
+// Updated key mapping to use actual A and B keys
+const keyMap: { [key: string]: string } = {
+  a: 'A',
+  A: 'A',
+  b: 'B',
+  B: 'B'
 };
+
+const handleButtonDown = () => {
+  isActive.value = true;
+  emit('buttonDown', props.text);
+};
+
+const handleButtonUp = () => {
+  isActive.value = false;
+  emit('buttonUp', props.text);
+  emit('click');
+  props.onClick?.();
+};
+
+const handleKeydown = (event: KeyboardEvent) => {
+  const pressedButton = keyMap[event.key];
+  if (pressedButton === props.text && !event.repeat) {
+    isActive.value = true;
+    emit('buttonDown', props.text);
+  }
+};
+
+const handleKeyup = (event: KeyboardEvent) => {
+  const pressedButton = keyMap[event.key];
+  if (pressedButton === props.text) {
+    isActive.value = false;
+    emit('buttonUp', props.text);
+    emit('click');
+    props.onClick?.();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('keyup', handleKeyup);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('keyup', handleKeyup);
+});
 </script>
 
 <template>
@@ -25,9 +72,13 @@ const handleClick = () => {
     :style="{ transform: `rotate(${rotate}deg)` }"
   >
     <button 
-      class="action-btn"
-      @click="handleClick"
+      :class="{ 'action-btn': true, active: isActive }"
       :aria-label="`${text} button`"
+      @mousedown="handleButtonDown"
+      @mouseup="handleButtonUp"
+      @mouseleave="handleButtonUp"
+      @touchstart.prevent="handleButtonDown"
+      @touchend.prevent="handleButtonUp"
     >
       <span class="btn-label">{{ text }}</span>
     </button>
@@ -51,6 +102,7 @@ const handleClick = () => {
     inset 1px 1px 2px rgba(255, 255, 255, 0.1), // Subtle highlight
     0 1px 2px rgba(0, 0, 0, 0.2);              // Outer shadow for lift
 
+  &.active,
   &:active {
     background-color: var(--gameboy-button-shadow);
     transform: scale(0.95);
