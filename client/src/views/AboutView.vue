@@ -9,7 +9,6 @@ import HouseIcon from '@/components/icons/HouseIcon.vue';
     <p>Made by <a href="https://github.com/BolleCola">tpaquier</a> and <a href="https://github.com/MarJC5">jmartin</a> </p>
     <p>Check out the repository <a href="https://github.com/MarJC5/red-tetris">here</a></p>
     <router-link to="/" class="link link--icon">
-      <HouseIcon />
       Back to Home
     </router-link>
   </div>

@@ -2,6 +2,7 @@
 import GameIcon from '@/components/icons/GameIcon.vue';
 import AboutIcon from '@/components/icons/AboutIcon.vue';
 import LeaderBoardIcon from '@/components/icons/LeaderBoardIcon.vue';
+import SettingsIcon from '@/components/icons/SettingsIcon.vue';
 </script>
 
 <template>
@@ -26,6 +27,13 @@ import LeaderBoardIcon from '@/components/icons/LeaderBoardIcon.vue';
           Leaderboard
         </router-link>
       </li>
+
+      <li>
+        <router-link to="/settings" class="link link--icon">
+          <SettingsIcon />
+          Settings
+        </router-link>
+      </li>
     </ul>
   </nav>
 </template>
@@ -40,7 +48,7 @@ import LeaderBoardIcon from '@/components/icons/LeaderBoardIcon.vue';
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
   }
 
   li {

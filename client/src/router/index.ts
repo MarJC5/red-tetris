@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/leaderboard',
       name: 'leaderboard',
       component: () => import('../views/LeaderboardView.vue')
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/SettingsView.vue')
     }
   ]
 })
