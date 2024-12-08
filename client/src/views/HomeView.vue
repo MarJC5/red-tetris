@@ -1,13 +1,25 @@
 <script setup lang="ts">
-import Gameboy from '@/components/gameboy/Gameboy.vue';
-
+import GameboyNav from '@/components/gameboy/GameboyNav.vue';
 </script>
 
 <template>
-  <main>
-    <Gameboy />
-  </main>
+  <div class="home">
+    <h1>Red Tetris</h1>
+    <p>Tetris Network with Red Pelicans Sauce</p>
+   <GameboyNav />
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1,
+  p {
+    text-align: center;
+  }
+}
 </style>

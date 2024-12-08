@@ -15,7 +15,9 @@ import PowerIndicator from '@/components/gameboy/PowerIndicator.vue';
       </div>
 
       <!-- Main display area -->
-      <div class="screen__display"></div>
+      <div class="screen__display">
+        <slot />
+      </div>
 
       <!-- Game Boy text -->
       <div class="screen__brand">
@@ -79,10 +81,16 @@ import PowerIndicator from '@/components/gameboy/PowerIndicator.vue';
 
   &__display {
     width: 85%;
+    max-width: 85%;
     aspect-ratio: 1/1;
     background-color: var(--gameboy-screen-pixels);
     margin: 0 auto 15px auto;
     border: 2px solid #111;
+    font-family: var(--gameboy-body-font);
+    font-size: 10px;
+    padding: 10px;
+    color: var(--gameboy-text);
+    overflow-y: auto;
   }
 
   &__brand {

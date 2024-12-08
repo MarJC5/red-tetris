@@ -1,133 +1,165 @@
 :root {
-    // Brand Colors
-    --color-cosmic-latte: #FAF5E0;
-    --color-mint-green: #C9F2EA;
-    --color-carrot-orange: #F4912F;
-    --color-ocean-blue: #128DC4;
-    --color-mini-pink: #FFDCE4;
-    --color-night: #161616;
-  
-    // System Colors
-    --color-text: var(--color-night);
-    --color-background: var(--color-cosmic-latte);
-    
-    // Game Boy Color - Purple Theme (Default)
-    --gameboy-body-primary: #7B1FA2;
-    --gameboy-body-shadow: #4A0072;
-    --gameboy-body-highlight: #9C27B0;
-    --gameboy-screen-border: #1A1A1A;
-    --gameboy-button-primary: #6B1B9A;
-    --gameboy-button-shadow: #4A148C;
-    --gameboy-dpad: #4A4A4A;
-    --gameboy-text: #FFFFFF;
-    --gameboy-text-shadow: rgba(0, 0, 0, 0.3);
-    --gameboy-speaker: #4A0072;
-    --gameboy-screen-bg: #9BA37E;
-    --gameboy-screen-pixels: #BFBFBF;
-    
-    // Screen Dimensions
-    --gameboy-width: 375px;
-    --gameboy-height: 667px;
-    --gameboy-screen-width: 320px;
-    --gameboy-screen-height: 288px;
-    
-    // Spacing
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-    
-    // Border Radius
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-    --radius-circle: 50%;
-    
-    // Transitions
-    --transition-speed: 0.3s;
-    --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --font-primary: 'EarlyGameBoy', sans-serif;
+  --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --gameboy-body-font: 'EarlyGameBoy', sans-serif;
+
+  // Brand Colors
+  --color-cosmic-latte: #FAF5E0;
+  --color-mint-green: #C9F2EA;
+  --color-carrot-orange: #F4912F;
+  --color-ocean-blue: #128DC4;
+  --color-mini-pink: #FFDCE4;
+  --color-night: #161616;
+
+  // System Colors
+  --color-text: var(--color-night);
+  --color-background: var(--color-cosmic-latte);
+
+  // Game Boy Color - Purple Theme (Default)
+  --gameboy-body-primary: #7B1FA2;
+  --gameboy-body-shadow: #4A0072;
+  --gameboy-body-highlight: #9C27B0;
+  --gameboy-screen-border: #1A1A1A;
+  --gameboy-button-primary: #6B1B9A;
+  --gameboy-button-shadow: #4A148C;
+  --gameboy-dpad: #4A4A4A;
+  --gameboy-text: #FFFFFF;
+  --gameboy-text-shadow: rgba(0, 0, 0, 0.3);
+  --gameboy-speaker: #4A0072;
+  --gameboy-screen-bg: #9BA37E;
+  --gameboy-screen-pixels: #DFDFDF;
+
+  // Screen Dimensions
+  --gameboy-width: 375px;
+  --gameboy-height: 667px;
+  --gameboy-screen-width: 320px;
+  --gameboy-screen-height: 288px;
+
+  // Spacing
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  // Border Radius
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-circle: 50%;
+
+  // Transitions
+  --transition-speed: 0.3s;
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Dark Mode - Classic Gray Game Boy Theme
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: var(--color-cosmic-latte);
+    --color-background: var(--color-night);
+
+    // Game Boy Classic Theme
+    --gameboy-body-primary: #BFBFBF;
+    --gameboy-body-shadow: #8F8F8F;
+    --gameboy-body-highlight: #DFDFDF;
+    --gameboy-screen-border: #373737;
+    --gameboy-button-primary: #2C2C2C;
+    --gameboy-button-shadow: #171717;
+    --gameboy-dpad: #2C2C2C;
+    --gameboy-text: #2C2C2C;
+    --gameboy-text-shadow: rgba(0, 0, 0, 0.2);
+    --gameboy-speaker: #2C2C2C;
+    --gameboy-screen-bg: #7E8416;
+    --gameboy-screen-pixels: #DFDFDF;
+
+    // Power Indicator
+    --gameboy-power-led: #CE0000;
   }
-  
-  // Dark Mode - Classic Gray Game Boy Theme
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --color-text: var(--color-cosmic-latte);
-      --color-background: var(--color-night);
-      
-      // Game Boy Classic Theme
-      --gameboy-body-primary: #BFBFBF;
-      --gameboy-body-shadow: #8F8F8F;
-      --gameboy-body-highlight: #DFDFDF;
-      --gameboy-screen-border: #373737;
-      --gameboy-button-primary: #2C2C2C;
-      --gameboy-button-shadow: #171717;
-      --gameboy-dpad: #2C2C2C;
-      --gameboy-text: #2C2C2C;
-      --gameboy-text-shadow: rgba(0, 0, 0, 0.2);
-      --gameboy-speaker: #2C2C2C;
-      --gameboy-screen-bg: #7E8416;
-      --gameboy-screen-pixels: #BFBFBF;
-      
-      // Power Indicator
-      --gameboy-power-led: #CE0000;
+}
+
+// Alternative Color Themes (can be toggled via classes)
+.theme-atomic-purple {
+  --gameboy-body-primary: #9B6B9E;
+  --gameboy-body-shadow: #784C7D;
+  --gameboy-body-highlight: #B584B8;
+}
+
+.theme-teal {
+  --gameboy-body-primary: #20B2AA;
+  --gameboy-body-shadow: #008B8B;
+  --gameboy-body-highlight: #48D1CC;
+}
+
+.theme-clear-blue {
+  --gameboy-body-primary: #4C8BF5;
+  --gameboy-body-shadow: #2962FF;
+  --gameboy-body-highlight: #82B1FF;
+}
+
+@font-face {
+  font-family: 'EarlyGameBoy';
+  src: url('fonts/EarlyGameBoy.woff2') format('woff2'),
+    url('fonts/EarlyGameBoy.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+// Base Styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color var(--transition-speed) var(--transition-ease),
+    background-color var(--transition-speed) var(--transition-ease);
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    color: var(--gameboy-text);
+
+    &.link {
+      &--icon {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+      }
     }
   }
-  
-  // Alternative Color Themes (can be toggled via classes)
-  .theme-atomic-purple {
-    --gameboy-body-primary: #9B6B9E;
-    --gameboy-body-shadow: #784C7D;
-    --gameboy-body-highlight: #B584B8;
+
+  p {
+    margin-bottom: var(--spacing-sm);
   }
-  
-  .theme-teal {
-    --gameboy-body-primary: #20B2AA;
-    --gameboy-body-shadow: #008B8B;
-    --gameboy-body-highlight: #48D1CC;
-  }
-  
-  .theme-clear-blue {
-    --gameboy-body-primary: #4C8BF5;
-    --gameboy-body-shadow: #2962FF;
-    --gameboy-body-highlight: #82B1FF;
-  }
-  
-  // Base Styles
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    font-weight: normal;
-  }
-  
-  body {
-    min-height: 100vh;
-    height: 100vh;
-    overflow: hidden;
-    color: var(--color-text);
-    background: var(--color-background);
-    transition: 
-      color var(--transition-speed) var(--transition-ease),
-      background-color var(--transition-speed) var(--transition-ease);
-    line-height: 1.6;
-    font-family:
-      Inter,
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      'Fira Sans',
-      'Droid Sans',
-      'Helvetica Neue',
-      sans-serif;
-    font-size: 15px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+}
