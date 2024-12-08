@@ -47,7 +47,6 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 15px;
   }
 

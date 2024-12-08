@@ -70,6 +70,7 @@ import PowerIndicator from '@/components/gameboy/PowerIndicator.vue';
 
     span {
       font-size: 10px;
+      font-weight: bold;
     }
   }
 
