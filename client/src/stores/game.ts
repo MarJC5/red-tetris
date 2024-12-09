@@ -5,9 +5,15 @@ import type { Socket } from 'socket.io-client'
 export const useGameStore = defineStore('game', () => {
   const board = ref<number[][]>([])
   const currentPiece = ref(null)
+  const nextPiece = ref(null)
   const players = ref<string[]>([])
-  const isLeader = ref(false)
-  const gameStarted = ref(false)
+  const isLeader = ref<boolean>(false)
+  const gameStarted = ref<boolean>(false)
+  const score = ref<number>(0)
+  const x = ref<number>(0)
+  const y = ref<number>(0)
+  const speed = ref<number>(0)
+  const gameOver = ref<boolean>(false)
   
   const currentPlayerBoard = computed(() => {
     // Merge current piece with board
@@ -33,9 +39,15 @@ export const useGameStore = defineStore('game', () => {
   return {
     board,
     currentPiece,
+    nextPiece,
     players,
     isLeader,
     gameStarted,
+    score,
+    x,
+    y,
+    speed,
+    gameOver,
     currentPlayerBoard,
     joinGame,
     startGame,
