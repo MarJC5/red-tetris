@@ -89,7 +89,6 @@ import PowerIndicator from '@/components/gameboy/PowerIndicator.vue';
     border: 4px solid #111;
     font-family: var(--gameboy-body-font);
     font-size: 10px;
-    padding: 10px;
     color: var(--gameboy-text);
     overflow-y: auto;
     border-radius: 3px;
@@ -98,6 +97,16 @@ import PowerIndicator from '@/components/gameboy/PowerIndicator.vue';
   &__brand {
     display: flex;
     justify-content: center;
+  }
+}
+
+.gameboy {
+  &--view {
+    .screen {
+      &__display {
+      padding: 10px;
+      }
+    }
   }
 }
 </style>

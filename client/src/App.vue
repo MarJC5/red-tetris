@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, computed } from 'vue'
 import { useSettingsStore } from '@/stores/settings'
 import Screen from '@/components/gameboy/Screen.vue'
 import DirectionButton from '@/components/gameboy/DirectionButton.vue'
 import ActionButton from '@/components/gameboy/ActionButton.vue'
 import Speakers from '@/components/gameboy/Speakers.vue'
 import MenuButton from '@/components/gameboy/MenuButton.vue'
+import { useRoute } from 'vue-router';
 
 const settingsStore = useSettingsStore()
+const route = useRoute()
+const currentRouteName = computed(() => route.name)
 
 // Create a function to handle resize
 const updateGameboySize = () => {
@@ -52,7 +55,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="gameboy">
+  <div :class="['gameboy', { 'gameboy--tetris': currentRouteName === 'tetris', 'gameboy--view': currentRouteName !== 'tetris'}]">
     <div class="gameboy__screen">
       <Screen>
         <RouterView />

@@ -13,14 +13,18 @@
   --color-S: green;
   --color-T: purple;
   --color-Z: red;
-  --color-empty: white;
+  --color-empty: #DFDFDF;
 
   /* Numbers define values that will be used throughout the CSS.
     --tile-size: 20px for example will set size of the grid squares. */
   --cols: 10;
   --rows: 18;
-  --tile-size: 20px;
-  --border-width: 5px;
+  --tile-size: 12px;
+  --border-width: 3px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Colors */
@@ -66,4 +70,17 @@
   border-top-color: var(--border-top-color);
   border-right-color: var(--border-right-color);
   border-bottom-color: var(--border-bottom-color);
+}
+
+.grid-board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--tile-size));
+  grid-gap: 0;
+  align-self: flex-start;
+}
+
+.next-block {
+  display: grid;
+  grid-template-columns: repeat(4, 12px);
+  grid-gap: 0;
 }
