@@ -1,4 +1,4 @@
-export const nextPieceData = 
+export const NEXT_PIECE_DATA = 
 [
 	// none
 	[
