@@ -10,18 +10,19 @@
     "build": "tsc",
     "watch": "tsc -w",
     "install-all": "cd .. && yarn install && cd client && yarn install",
-    "deploy": "yarn build && yarn start"
+    "deploy": "cross-env NODE_ENV=production yarn build && cross-env NODE_ENV=production yarn start"
   },
   "dependencies": {
     "express": "^4.21.2",
     "socket.io": "^4.8.0"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "ts-node": "^10.9.1",
-    "nodemon": "^3.1.7",
-    "@types/node": "^20.8.4",
     "@types/express": "^4.17.17",
-    "@types/socket.io": "^3.0.1"
+    "@types/node": "^20.8.4",
+    "@types/socket.io": "^3.0.1",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }
