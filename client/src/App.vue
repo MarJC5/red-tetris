@@ -187,7 +187,7 @@ onUnmounted(() => {
       span {
         color: var(--gameboy-button-shadow);
         position: absolute;
-        top: 50%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;

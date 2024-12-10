@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import TetrisView from '../views/TetrisView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,8 +12,24 @@ const router = createRouter({
     },
     {
       path: '/tetris',
-      name: 'tetris',
-      component: () => import('../views/TetrisView.vue')
+      component: TetrisView,
+      children: [
+        { 
+          path: 'username',
+          name: 'tetris-username',
+          component: () => import('../views/viewstetris/UsernameView.vue')
+        }, 
+        { 
+          path: 'settings',
+          name: 'tetris-settings',
+          component: () => import('../views/viewstetris/TetrisSettingsView.vue')
+        }, 
+        { 
+          path: '#[id][username]',
+          name: 'tetris-game',
+          component: () => import('../views/viewstetris/TetrisGameView.vue')
+        }
+      ]
     },
     {
       path: '/about',
