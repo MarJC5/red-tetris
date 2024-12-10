@@ -13,7 +13,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import GridSquare from './GridSquare.vue'
-import { NEXT_PIECE_DATA } from '../utils/NextPieceData'
 
 
 interface Props {
