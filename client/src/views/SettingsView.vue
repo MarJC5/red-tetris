@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import SoundEffects from '@/components/Settings/SoundEffects.vue'
-import ThemeSelector from '@/components/Settings/ThemeSelector.vue'
+import SoundEffects from '@/components/settings/SoundEffects.vue'
+import ThemeSelector from '@/components/settings/ThemeSelector.vue'
 </script>
 
 <template>

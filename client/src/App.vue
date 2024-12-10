@@ -144,7 +144,7 @@ onUnmounted(() => {
     max-width: var(--gameboy-width);
     height: var(--gameboy-height);
     margin: 15vh auto;
-    border-radius: 8px 8px 40px 8px;
+    border-radius: 8px 8px 40px 40px;
     box-shadow: 
       // Subtle outer shadow
       0 8px 24px rgba(0, 0, 0, 0.2),
@@ -153,7 +153,7 @@ onUnmounted(() => {
 
     // Grainy overlay
     &::before {
-      border-radius: 8px 8px 40px 8px;
+      border-radius: 8px 8px 40px 40px;
     }
   }
 
