@@ -1,20 +1,16 @@
-<script>
-  export default {
-	name: 'SettingsView',
-	methods: {
-	  goToGame() {
-		this.$router.push({ name: 'tetris-game' })
-	  }
-	}
-  }
+<script lang="ts" setup>
+import Settings from '@/components/settingsTetris/Settings.vue'
 </script>
 
 <template>
-	<div>
-	  <h1>Choisissez vos paramètres</h1>
-	  <form @submit.prevent="goToGame">
-		<!-- Ajoute ici les paramètres du jeu -->
-		<button type="submit">Commencer à jouer</button>
-	  </form>
+	<div class="settingsTetris">
+		<Settings />
+		<!-- <router-link to="/" class="link link--icon"> Back to Home </router-link> -->
 	</div>
-</template>  
+</template>
+
+<style scoped lang="scss">
+.link {
+  margin-top: 20px;
+}
+</style>

@@ -1,11 +1,9 @@
-<script>
-  import { RouterView } from 'vue-router'
-
-  export default {
-    name: 'TetrisView'
-  }
+<script setup lang="ts">
 </script>
 
 <template>
     <RouterView />
 </template>
+
+<style scoped lang="scss">
+</style>

@@ -43,7 +43,7 @@ const handleButtonDown = () => {
 
   // START navigate to tetris
   if (props.text === 'START') {
-      router.push('/tetris');
+      router.push('/tetris/username');
     }
 };
 
@@ -67,7 +67,7 @@ const handleKeydown = (event: KeyboardEvent) => {
 
     // START navigate to tetris
     if (props.text === 'START') {
-      router.push('/tetris');
+      router.push('/tetris/username');
     }
   }
 };

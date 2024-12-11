@@ -9,7 +9,7 @@ import SettingsIcon from '@/components/icons/SettingsIcon.vue';
   <nav class="gameboy-nav">
     <ul>
       <li>
-        <router-link to="/tetris" class="link link--icon">
+        <router-link to="/tetris/username" class="link link--icon">
           <GameIcon />
           Tetris
         </router-link>
