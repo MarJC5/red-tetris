@@ -3,7 +3,7 @@ import Username from '@/components/settingsTetris/Username.vue'
 </script>
 
 <template>
-	<div class="usernameTetris">
+	<div class="username-tetris">
 		<Username />
 		<router-link to="/" class="link link--icon"> Back to Home </router-link>
 	</div>

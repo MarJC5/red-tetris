@@ -3,9 +3,9 @@ import Settings from '@/components/settingsTetris/Settings.vue'
 </script>
 
 <template>
-	<div class="settingsTetris">
+	<div class="settings-tetris">
 		<Settings />
-		<!-- <router-link to="/" class="link link--icon"> Back to Home </router-link> -->
+		<router-link to="/tetris/username" class="link link--icon"> Back to Username </router-link>
 	</div>
 </template>
 
