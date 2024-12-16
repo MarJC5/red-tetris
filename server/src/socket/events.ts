@@ -1,9 +1,10 @@
 export const EVENTS = {
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
-    ERROR: 'error',
+    ERROR: 'error',    
 
     // Game events
+    CREATE_GAME: 'room.createGame',
     JOIN_GAME: 'game:join',
     LEAVE_GAME: 'game:leave',
     START_GAME: 'game:start',

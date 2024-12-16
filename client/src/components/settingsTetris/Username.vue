@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import { ref } from 'vue' 
+	import { ref } from 'vue'
 	
 	const username = ref('YourUsername')
 </script>
@@ -9,7 +9,10 @@
 		<h2>Choose Username</h2>
 		<input v-model="username" placeholder="Entrez votre pseudo" />
 		<router-link class="link link--icon" :to="{ name: 'tetris-settings', query: { username: username }}">
-			Next
+			Create Room
+		</router-link>
+		<router-link class="link link--icon" :to="{ name: '', query: { username: username }}">
+			Join a room
 		</router-link>
 	</div>
 </template>

@@ -1,9 +1,26 @@
 <script lang="ts" setup>
-	import { computed } from 'vue' 
+	import { ref } from 'vue' 
 	import { useRoute } from 'vue-router'
+  import socket from "../../plugins/socket"
 
-	const route = useRoute() 
-	const username = computed(() => route.query.username as string)
+	const route = useRoute()
+  const difficulty = ref(1)
+  const enablePreview = ref(false)
+  const phantomPiece = ref(false)
+  const bonus = ref(false)
+
+  const applySettings = () => { 
+    const settings = { 
+      difficulty: difficulty.value, 
+      enablePreview: enablePreview.value, 
+      phantomPiece: phantomPiece.value, 
+      bonus: bonus.value 
+    };
+
+    socket.emit('room.createGame', settings, (roomId: string) => {
+      route.push({ name: 'tetris-game', params: { roomId, username: route.query.username as string } })
+    })
+  };
 </script>
 
 <template>
@@ -40,9 +57,7 @@
 		Bonus
 		</label>
 
-		<router-link :to="{ name: 'tetris-game', params: { username: username }}"> 
-			Create room
-		</router-link>
+		<button @click="applySettings">Apply settings</button>
 	</div>
 </template>
 
