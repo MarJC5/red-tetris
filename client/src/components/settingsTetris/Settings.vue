@@ -1,26 +1,15 @@
-<script lang="ts" setup>
-	import { ref } from 'vue' 
-	import { useRoute } from 'vue-router'
-  import socket from "../../plugins/socket"
+<script setup lang="ts">
+	import { ref } from 'vue'
+  import { useRoute } from 'vue-router'
 
-	const route = useRoute()
+  // connect these to pinia for use in the game compoinent to server
   const difficulty = ref(1)
   const enablePreview = ref(false)
   const phantomPiece = ref(false)
   const bonus = ref(false)
-
-  const applySettings = () => { 
-    const settings = { 
-      difficulty: difficulty.value, 
-      enablePreview: enablePreview.value, 
-      phantomPiece: phantomPiece.value, 
-      bonus: bonus.value 
-    };
-
-    socket.emit('room.createGame', settings, (roomId: string) => {
-      route.push({ name: 'tetris-game', params: { roomId, username: route.query.username as string } })
-    })
-  };
+  
+  const route = useRoute() 
+	const username = route.query.username as string
 </script>
 
 <template>
@@ -57,7 +46,9 @@
 		Bonus
 		</label>
 
-		<button @click="applySettings">Apply settings</button>
+		<router-link :to="{ name: 'tetris-game', params: { username: username } }"> 
+			Create Room
+		</router-link>
 	</div>
 </template>
 

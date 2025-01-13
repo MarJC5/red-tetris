@@ -9,7 +9,7 @@
 		<h2>Choose Username</h2>
 		<input v-model="username" placeholder="Entrez votre pseudo" />
 		<router-link class="link link--icon" :to="{ name: 'tetris-settings', query: { username: username }}">
-			Create Room
+			Create Game
 		</router-link>
 		<router-link class="link link--icon" :to="{ name: '', query: { username: username }}">
 			Join a room

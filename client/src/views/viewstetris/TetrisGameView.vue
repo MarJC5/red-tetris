@@ -1,18 +1,10 @@
 <script lang="ts" setup>
-  import GridBoard from '@/components/tetris/GridBoard.vue'
-  import GameDetails from '@/components/tetris/GameDetails.vue'
-  
-  import { computed } from 'vue' 
-  import { useRoute } from 'vue-router'
-
-  const route = useRoute() 
-  const username = computed(() => route.params.username as string)
+  import GameRoom from '@/components/tetris/GameRoom.vue'
 </script>
 
 <template>
   <div class="tetris">
-    <GameDetails />
-    <GridBoard />
+    <GameRoom />
   </div>
 </template>
 
