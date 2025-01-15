@@ -25,7 +25,7 @@ const router = createRouter({
           component: () => import('../views/viewstetris/TetrisSettingsView.vue')
         }, 
         { 
-          path: '/#[id][:username]',
+          path: '/#:id[:username]',
           name: 'tetris-game',
           component: () => import('../views/viewstetris/TetrisGameView.vue')
         }

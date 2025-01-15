@@ -7,9 +7,20 @@
   const socket = ref<Socket | null>(null)
   const connected = ref(false)
   const bool = ref(false)
+  const username = ref("")
+  const id = ref("");
 
   function launchGame() {
     bool.value = true;
+  }
+  
+  const parseURL = () => {
+    const parsedURL = new URL(window.location.href);
+    const hash = parsedURL.hash.substring(1);
+    
+    let tempUsername = "";
+    [id.value, tempUsername] = hash.split('[');
+    username.value = tempUsername.replace(']', '');
   }
 
   const initializeSocket = () => {
@@ -17,20 +28,25 @@
       socket.value = io('http://localhost:3000')
 
       socket.value.on('connect', () => {
-        console.log('Connected to server')
+        console.log('Connected to room')
         connected.value = true
       })
 
+      socket.value.emit('game:createRoom', { id: id.value, username: username.value })
+
       socket.value.on('disconnect', () => {
-        console.log('Disconnected from server')
+        console.log('Disconnected from room')
         connected.value = false
       })
     } catch (error) {
-      console.error('Socket initialization failed:', error)
+      console.error('Socket room initialization failed:', error)
     }
   }
 
   onMounted(() => {
+    // Parse the url to have username and id
+    parseURL()
+
     // Wait 1 seconds before connecting to the server
     setTimeout(initializeSocket, 1000)
   })

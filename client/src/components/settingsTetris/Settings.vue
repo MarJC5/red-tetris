@@ -9,7 +9,19 @@
   const bonus = ref(false)
   
   const route = useRoute() 
-	const username = route.query.username as string
+	const username = ref(route.query.username as string)
+  const id = ref(generateId());
+
+  function generateId() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    let uniqueId = '';
+    let length = 20;
+    for (let i = 0; i < length; i++) { 
+      const randomIndex = Math.floor(Math.random() * characters.length); 
+      uniqueId += characters[randomIndex]; 
+    } 
+    return uniqueId;
+  }
 </script>
 
 <template>
@@ -46,7 +58,7 @@
 		Bonus
 		</label>
 
-		<router-link :to="{ name: 'tetris-game', params: { username: username } }"> 
+		<router-link :to="{ name: 'tetris-game', params: { id: id, username: username } }"> 
 			Create Room
 		</router-link>
 	</div>

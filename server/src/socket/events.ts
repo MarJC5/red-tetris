@@ -4,7 +4,7 @@ export const EVENTS = {
     ERROR: 'error',    
 
     // Game events
-    CREATE_GAME: 'game:createGame',
+    CREATE_ROOM: 'game:createRoom',
     JOIN_GAME: 'game:join',
     LEAVE_GAME: 'game:leave',
     START_GAME: 'game:start',
