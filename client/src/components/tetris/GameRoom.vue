@@ -32,7 +32,7 @@
         connected.value = true
       })
 
-      socket.value.emit('game:createRoom', { id: id.value, username: username.value })
+      socket.value.emit('game:join', { id: id.value, username: username.value })
 
       socket.value.on('disconnect', () => {
         console.log('Disconnected from room')

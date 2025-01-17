@@ -18,6 +18,11 @@ const router = createRouter({
           path: 'username',
           name: 'tetris-username',
           component: () => import('../views/viewstetris/TetrisUsernameView.vue')
+        },
+        { 
+          path: 'roomlist',
+          name: 'tetris-roomlist',
+          component: () => import('../views/viewstetris/TetrisRoomlistView.vue')
         }, 
         {
           path: 'settings',

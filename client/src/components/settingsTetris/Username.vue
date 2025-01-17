@@ -11,7 +11,7 @@
 		<router-link class="link link--icon" :to="{ name: 'tetris-settings', query: { username: username }}">
 			Create Game
 		</router-link>
-		<router-link class="link link--icon" :to="{ name: '', query: { username: username }}">
+		<router-link class="link link--icon" :to="{ name: 'tetris-roomlist', query: { username: username }}">
 			Join a room
 		</router-link>
 	</div>
