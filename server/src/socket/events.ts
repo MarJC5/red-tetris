@@ -9,6 +9,9 @@ export const EVENTS = {
     START_GAME: 'game:start',
     GAME_OVER: 'game:over',
 
+    // Room events
+    ROOM_LIST: 'room:list',
+
     // Player events
     MOVE_PIECE: 'player:move',
     ROTATE_PIECE: 'player:rotate',

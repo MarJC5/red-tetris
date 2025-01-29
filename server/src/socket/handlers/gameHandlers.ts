@@ -2,6 +2,7 @@ import { Socket } from 'socket.io';
 import { logger } from '../../services/logger';
 import { Game } from '../../models/Game';
 import { EVENTS } from '../events';
+import { myRooms } from '../../models/Room';
 
 const games = new Map<string, Game>();
 
@@ -11,6 +12,9 @@ export const handleJoinGame = (socket: Socket) => async (roomId: string, playerN
     if (!game) {
       game = new Game(roomId);
       games.set(roomId, game);
+
+      myRooms.addRoom(roomId, playerName);
+      console.log("Room List : ", myRooms.getRoom());
     }
     
     // Join socket.io room
