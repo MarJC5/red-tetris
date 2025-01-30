@@ -5,6 +5,7 @@
 
 	const socket = ref<Socket | null>(null)
 	const connected = ref(false)
+	const roomList = ref([])
 
 	const initializeSocket = () => {
 		try {
@@ -14,6 +15,11 @@
 				console.log('Connected to room')
 				connected.value = true
 
+			})
+
+			socket.value.on('', (list) => {
+				console.log(list);
+				roomList.value = list;
 			})
 
 			socket.value.on('disconnect', () => {

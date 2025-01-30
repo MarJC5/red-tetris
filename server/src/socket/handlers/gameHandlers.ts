@@ -13,7 +13,7 @@ export const handleJoinGame = (socket: Socket) => async (roomId: string, playerN
       game = new Game(roomId);
       games.set(roomId, game);
 
-      myRooms.addRoom(roomId, playerName);
+      myRooms.addRoom(roomId, socket.id);
       console.log("Room List : ", myRooms.getRoom());
     }
     
@@ -30,5 +30,23 @@ export const handleJoinGame = (socket: Socket) => async (roomId: string, playerN
   } catch (error) {
     logger.error('Error joining game', { error, roomId, playerName });
     socket.emit(EVENTS.ERROR, 'Failed to join game');
+  }
+};
+
+export const handleLeaveGame = (socket: Socket) => async (roomId: string, playerName: string) => {
+  try {
+    // Delete the room only if it's the owner
+    myRooms.deleteRoom(roomId, socket.id);
+
+    // Leave socket.io room
+    await socket.leave(roomId);
+    
+    // Notify room of leaving's player
+    // socket.to(roomId).emit(EVENTS.PLAYERS_UPDATE, game.getPlayers());
+    
+    logger.info('Player leaved game', { roomId, playerName, socketId: socket.id });
+  } catch (error) {
+    logger.error('Error leaving game', { error, roomId, playerName });
+    socket.emit(EVENTS.ERROR, 'Failed to leave game');
   }
 };

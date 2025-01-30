@@ -1,5 +1,5 @@
 import { Server, Socket } from 'socket.io';
-import { handleJoinGame } from './gameHandlers';
+import { handleJoinGame, handleLeaveGame } from './gameHandlers';
 import { handleRoom } from './roomHandlers';
 import { handleMove, handleRotate, handleDrop } from './playerHandlers';
 import { EVENTS } from '../events';
@@ -7,6 +7,7 @@ import { EVENTS } from '../events';
 export const attachGameHandlers = (io: Server, socket: Socket) => {
   // Game handlers
   socket.on(EVENTS.JOIN_GAME, handleJoinGame(socket));
+  socket.on(EVENTS.LEAVE_GAME, handleLeaveGame(socket));
 
   // Room handlers
   socket.on(EVENTS.ROOM_LIST, handleRoom(socket));

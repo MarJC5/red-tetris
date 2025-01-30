@@ -32,7 +32,7 @@
         connected.value = true
       })
 
-      socket.value.emit('game:join', { id: id.value, username: username.value })
+      socket.value.emit('game:join', { id: id.value }, { username: username.value })
 
       socket.value.on('disconnect', () => {
         console.log('Disconnected from room')
@@ -54,6 +54,7 @@
   onUnmounted(() => {
     // Clean up socket connection
     if (socket.value) {
+      socket.value.emit('game:leave', { id: id.value }, { username: username.value })
       socket.value.disconnect()
       socket.value = null
     }

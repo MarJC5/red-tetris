@@ -11,7 +11,12 @@ class RoomList {
 	}
 
 	deleteRoom(id: string, name: string) {
-		// filter
+		this.rooms = this.rooms.filter(function(room){
+			console.log("room :", room[0], room[1])
+			console.log("Delete room :", id, "of :", name)
+			if (room[1] != name)
+			  return room;
+		});
 	}
 
 	getRoom() {
