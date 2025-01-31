@@ -8,9 +8,6 @@ export const attachGameHandlers = (io: Server, socket: Socket) => {
   // Game handlers
   socket.on(EVENTS.JOIN_GAME, handleJoinGame(socket));
   socket.on(EVENTS.LEAVE_GAME, handleLeaveGame(socket));
-
-  // Room handlers
-  socket.on(EVENTS.ROOM_LIST, handleRoom(socket));
   
   // Player handlers
   socket.on(EVENTS.MOVE_PIECE, handleMove(io, socket));

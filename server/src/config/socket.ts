@@ -3,6 +3,7 @@ import { Server as HttpServer } from 'http';
 import { logger } from '../services/logger';
 import { EVENTS } from '../socket/events';
 import { attachGameHandlers } from '../socket/handlers';
+import { myRooms } from '../../src/models/Room';
 
 export const configureSocket = (httpServer: HttpServer) => {
   const io = new Server(httpServer, {
@@ -23,6 +24,8 @@ export const configureSocket = (httpServer: HttpServer) => {
 
     // Attach all event handlers
     attachGameHandlers(io, socket);
+
+    socket.emit(EVENTS.ROOM_LIST, myRooms.getRoom());
 
     socket.on(EVENTS.DISCONNECT, () => {
       logger.info('Client disconnected', { socketId: socket.id });
