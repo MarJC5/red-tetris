@@ -1,26 +1,13 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { io, Socket } from 'socket.io-client'
+import { useGameStore } from '@/stores/game'
 
-const socket = ref<Socket | null>(null)
 const connected = ref(false)
+const gameStore = useGameStore();
 
 const initializeSocket = () => {
-  try {
-    socket.value = io('http://localhost:3000')
-
-    socket.value.on('connect', () => {
-      console.log('Connected to server')
-      connected.value = true
-    })
-
-    socket.value.on('disconnect', () => {
-      console.log('Disconnected from server')
-      connected.value = false
-    })
-  } catch (error) {
-    console.error('Socket initialization failed:', error)
-  }
+  connected.value = gameStore.setSocket();
 }
 
 onMounted(() => {
@@ -30,10 +17,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   // Clean up socket connection
-  if (socket.value) {
-    socket.value.disconnect()
-    socket.value = null
-  }
+  connected.value = gameStore.deleteSocket();
 })
 </script>
 

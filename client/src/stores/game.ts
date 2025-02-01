@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Socket } from 'socket.io-client'
+import { Socket, io } from 'socket.io-client'
 
 export const useGameStore = defineStore('game', () => {
   const board = ref<number[][]>([])
@@ -14,7 +14,39 @@ export const useGameStore = defineStore('game', () => {
   const y = ref<number>(0)
   const speed = ref<number>(0)
   const gameOver = ref<boolean>(false)
+  const userSocket = ref<Socket | null>(null);
   
+  const setSocket = () => {
+    try {
+      userSocket.value = io('http://localhost:3000')
+  
+      userSocket.value.on('connect', () => {
+        console.log('Connected to server')
+      })
+  
+      userSocket.value.on('disconnect', () => {
+        console.log('Disconnected from server')
+      })
+      return true;
+    } catch (error) {
+      console.error('Socket initialization failed:', error)
+      return false;
+    }
+  }
+  
+  const deleteSocket = () => {
+    if (userSocket.value != null) {
+      userSocket.value.disconnect()
+      userSocket.value = null;
+      return false;
+    }
+    return true;
+  }
+
+  const getSocket = () => {
+      return userSocket.value;
+  }
+
   const currentPlayerBoard = computed(() => {
     // Merge current piece with board
     return board.value
@@ -52,6 +84,10 @@ export const useGameStore = defineStore('game', () => {
     joinGame,
     startGame,
     movePiece,
-    rotatePiece
+    rotatePiece,
+    userSocket,
+    setSocket,
+    getSocket,
+    deleteSocket
   }
 })

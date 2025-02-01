@@ -3,12 +3,14 @@
   import GameDetails from '@/components/tetris/GameDetails.vue'
   import { ref, onMounted, onUnmounted } from 'vue';
   import { io, Socket } from 'socket.io-client'
+  import { useGameStore } from '@/stores/game'
 
-  const socket = ref<Socket | null>(null)
   const connected = ref(false)
   const bool = ref(false)
   const username = ref("")
   const id = ref("");
+  const gameStore = useGameStore();
+  const userSocket = gameStore.getSocket();
 
   function launchGame() {
     bool.value = true;
@@ -25,19 +27,8 @@
 
   const initializeSocket = () => {
     try {
-      socket.value = io('http://localhost:3000')
-
-      socket.value.on('connect', () => {
-        console.log('Connected to room')
-        connected.value = true
-      })
-
-      socket.value.emit('game:join', { id: id.value }, { username: username.value })
-
-      socket.value.on('disconnect', () => {
-        console.log('Disconnected from room')
-        connected.value = false
-      })
+      if (userSocket != null)
+        userSocket.emit('game:join', { id: id.value }, { username: username.value })
     } catch (error) {
       console.error('Socket room initialization failed:', error)
     }
@@ -53,10 +44,8 @@
 
   onUnmounted(() => {
     // Clean up socket connection
-    if (socket.value) {
-      socket.value.emit('game:leave', { id: id.value }, { username: username.value })
-      socket.value.disconnect()
-      socket.value = null
+    if (userSocket) {
+      userSocket.emit('game:leave', { id: id.value }, { username: username.value })
     }
   })
 </script>

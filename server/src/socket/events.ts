@@ -1,7 +1,7 @@
 export const EVENTS = {
     CONNECT: 'connect',
     DISCONNECT: 'disconnect',
-    ERROR: 'error',    
+    ERROR: 'error',
 
     // Game events
     JOIN_GAME: 'game:join',

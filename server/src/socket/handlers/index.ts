@@ -1,6 +1,5 @@
 import { Server, Socket } from 'socket.io';
 import { handleJoinGame, handleLeaveGame } from './gameHandlers';
-import { handleRoom } from './roomHandlers';
 import { handleMove, handleRotate, handleDrop } from './playerHandlers';
 import { EVENTS } from '../events';
 

@@ -2,6 +2,7 @@
   	import { useRoute, useRouter } from 'vue-router'
 	import { ref, onMounted, onUnmounted } from 'vue'
 	import { io, Socket } from 'socket.io-client'
+	import { useGameStore } from '@/stores/game'
 
 	const socket = ref<Socket | null>(null)
 	const connected = ref(false)
@@ -9,6 +10,7 @@
 	const route = useRoute() 
 	const redirect = useRouter();
 	const username = ref(route.query.username as string)
+	const gameStore = useGameStore();
 
 	function joinRoom(roomId: string, hostUsername: string, username: string) {
 		
@@ -27,7 +29,6 @@
 			socket.value.on('connect', () => {
 				console.log('Connected to list')
 				connected.value = true
-
 			})
 
 			socket.value.on('room:list', (rooms) => {
