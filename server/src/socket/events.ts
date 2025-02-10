@@ -10,6 +10,7 @@ export const EVENTS = {
     GAME_OVER: 'game:over',
 
     // Room events
+    ROOM_GET_LIST: 'room:getList',
     ROOM_LIST: 'room:list',
 
     // Player events

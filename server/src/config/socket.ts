@@ -25,8 +25,6 @@ export const configureSocket = (httpServer: HttpServer) => {
     // Attach all event handlers
     attachGameHandlers(io, socket);
 
-    socket.emit(EVENTS.ROOM_LIST, myRooms.getRoom());
-
     socket.on(EVENTS.DISCONNECT, () => {
       logger.info('Client disconnected', { socketId: socket.id });
     });

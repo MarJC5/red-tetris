@@ -15,13 +15,20 @@ export const useGameStore = defineStore('game', () => {
   const speed = ref<number>(0)
   const gameOver = ref<boolean>(false)
   const userSocket = ref<Socket | null>(null);
-  
+  const roomList = ref<string[]>([]);
+
   const setSocket = () => {
     try {
       userSocket.value = io('http://localhost:3000')
   
       userSocket.value.on('connect', () => {
+        updateRoomList();
         console.log('Connected to server')
+      })
+
+      userSocket.value.on('room:list', (rooms) => {
+        console.log("Rooms-front :", rooms);
+        roomList.value = rooms;
       })
   
       userSocket.value.on('disconnect', () => {
@@ -45,6 +52,20 @@ export const useGameStore = defineStore('game', () => {
 
   const getSocket = () => {
       return userSocket.value;
+  }
+
+  const updateRoomList = () => {
+    if (userSocket.value != null) {
+      userSocket.value.emit('room:getList', () => {
+        console.log("RoomList updated");
+      })
+    } else {
+      console.log("can't get room's list, socket is null");
+    }
+  }
+
+  const getRoomList = () => {
+    return roomList.value;
   }
 
   const currentPlayerBoard = computed(() => {
@@ -88,6 +109,8 @@ export const useGameStore = defineStore('game', () => {
     userSocket,
     setSocket,
     getSocket,
-    deleteSocket
+    deleteSocket,
+    getRoomList,
+    updateRoomList
   }
 })

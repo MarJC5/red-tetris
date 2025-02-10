@@ -1,4 +1,4 @@
-import { Socket } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { logger } from '../../services/logger';
 import { Game } from '../../models/Game';
 import { EVENTS } from '../events';
@@ -6,7 +6,7 @@ import { myRooms } from '../../models/Room';
 
 const games = new Map<string, Game>();
 
-export const handleJoinGame = (socket: Socket) => async (roomId: string, playerName: string) => {
+export const handleJoinGame = (socket: Socket, io: Server) => async (roomId: string, playerName: string) => {
   try {
     roomId = JSON.stringify(roomId).replace('{"id":"', '').replace('"}', '');
     playerName = JSON.stringify(playerName).replace('{"username":"', '').replace('"}', '');
@@ -16,6 +16,7 @@ export const handleJoinGame = (socket: Socket) => async (roomId: string, playerN
       games.set(roomId, game);
 
       myRooms.addRoom(roomId, socket.id, playerName);
+      io.emit(EVENTS.ROOM_LIST, myRooms.getRoom());
       console.log("Room List : ", myRooms.getNameRoom());
     }
     
@@ -35,13 +36,14 @@ export const handleJoinGame = (socket: Socket) => async (roomId: string, playerN
   }
 };
 
-export const handleLeaveGame = (socket: Socket) => async (roomId: string, playerName: string) => {
+export const handleLeaveGame = (socket: Socket, io: Server) => async (roomId: string, playerName: string) => {
   try {
     roomId = JSON.stringify(roomId).replace('{"id":"', '').replace('"}', '');
     playerName = JSON.stringify(playerName).replace('{"username":"', '').replace('"}', '');
     
     // Delete the room only if it's the owner
     myRooms.deleteRoom(roomId, socket.id, playerName);
+    io.emit(EVENTS.ROOM_LIST, myRooms.getRoom());
 
     // Leave socket.io room
     await socket.leave(roomId);
